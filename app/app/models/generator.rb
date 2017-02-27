@@ -24,4 +24,12 @@ class Generator < ApplicationRecord
     # generate range between numbers
     return Range.new(self.start_param,self.end_param)
   end
+
+  # decided to skip removing all evens, test against 2..n
+  def primes(n)
+    if n <= 1
+      return []
+    end
+
+  end
 end

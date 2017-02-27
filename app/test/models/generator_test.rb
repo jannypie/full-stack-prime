@@ -58,4 +58,13 @@ class GeneratorTest < ActiveSupport::TestCase
     assert_equal Range.new(1,10), generator.make_range
   end
 
+  test "primes method return empty if sent 1" do
+    params = {
+      :start_param => 1,
+      :end_param => 10
+    }
+    generator = Generator.new(params)
+    assert_equal [], generator.primes(1)
+  end
+
 end
