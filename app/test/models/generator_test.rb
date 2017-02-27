@@ -38,7 +38,7 @@ class GeneratorTest < ActiveSupport::TestCase
   test "should not save unless params are integers" do
     params = {
       :start_param => "1",
-      :end_param => "12"
+      :end_param => "apple"
     }
     generator = Generator.new(params)
     assert_not generator.save, "Created the generator with non-integers"
