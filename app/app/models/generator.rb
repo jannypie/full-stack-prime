@@ -10,6 +10,10 @@ class Generator < ApplicationRecord
   # break condition is when all numbers have been tested
   # and the only value is one that returns 1
 
+  def init
+    (self.range).each do |num|
+    end
+  end
 
   def make_range
     @range = Range.new(self.start_param,self.end_param)
@@ -30,7 +34,7 @@ class Generator < ApplicationRecord
         return []
       # but if we've gotten here and it IS itself
       elsif num % x == 0 && num == x
-        # that means it's prime
+        # that means it's prime: break condition
         return [x]
       # otherwise, there was a remainder and it's not prime
       else

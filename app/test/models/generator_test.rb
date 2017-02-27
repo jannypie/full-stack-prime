@@ -87,4 +87,15 @@ class GeneratorTest < ActiveSupport::TestCase
     assert_equal [], generator.primes(100)
   end
 
+  test "primes method returns empty if sent non-prime numbers" do
+    params = {
+      :start_param => 1,
+      :end_param => 10
+    }
+    generator = Generator.new(params)
+    assert_equal [], generator.primes(4)
+    assert_equal [], generator.primes(12)
+    assert_equal [], generator.primes(100)
+  end
+
 end
