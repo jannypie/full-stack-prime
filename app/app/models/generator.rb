@@ -5,7 +5,6 @@ class Generator < ApplicationRecord
   # pseudocode the algorithm
   # take in two integers
   # return any prime numbers in between, inclusive
-  # first step: strip any even numbers
 
   # brute force:
   # for each number n btwn both integers, do
@@ -21,7 +20,8 @@ class Generator < ApplicationRecord
   # if not, add 2 to x and recursively call the number again
 
 
-  # def prime_factors(start, end)
-  #
-  # end
+  def make_range
+    # generate range between numbers
+    return Range.new(self.start_param,self.end_param)
+  end
 end

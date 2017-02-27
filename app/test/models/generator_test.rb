@@ -47,6 +47,15 @@ class GeneratorTest < ActiveSupport::TestCase
     assert_not_equal 12, generator.end_param
   end
 
+  # test: only accept numbers >=1
 
+  test "generator method should have access to param values" do
+    params = {
+      :start_param => 1,
+      :end_param => 10
+    }
+    generator = Generator.new(params)
+    assert_equal Range.new(1,10), generator.make_range
+  end
 
 end
