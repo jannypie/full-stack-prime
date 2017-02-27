@@ -2,6 +2,8 @@ class Generator < ApplicationRecord
   validates :start_param, presence: true, numericality: { only_integer: true }
   validates :end_param, presence: true, numericality: { only_integer: true }
 
+  attr_reader :list
+
   # new pseudocode
   # rethinking my method
   # needs: input, function, break condition, output
@@ -11,13 +13,13 @@ class Generator < ApplicationRecord
   # and the only value is one that returns 1
 
   def init
-    (self.range).each do |num|
-    end
+    @list = []
+    @range = make_range
   end
 
   def make_range
-    @range = Range.new(self.start_param,self.end_param)
-    return @range
+    range = Range.new(self.start_param,self.end_param)
+    return range
   end
 
   def primes(num)
@@ -35,7 +37,7 @@ class Generator < ApplicationRecord
       # but if we've gotten here and it IS itself
       elsif num % x == 0 && num == x
         # that means it's prime: break condition
-        return [x]
+        return x
       # otherwise, there was a remainder and it's not prime
       else
         next

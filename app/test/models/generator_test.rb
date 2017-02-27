@@ -1,9 +1,7 @@
 require 'test_helper'
 
 class GeneratorTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
 
   test "should not save without parameters" do
     generator = Generator.new
@@ -49,53 +47,44 @@ class GeneratorTest < ActiveSupport::TestCase
 
   # test: only accept numbers >=1
 
-  test "generator method should have access to param values" do
-    params = {
-      :start_param => 1,
-      :end_param => 10
-    }
+  params = {
+    :start_param => 1,
+    :end_param => 10
+  }
+
+  test "make_range method should have access to param values" do
     generator = Generator.new(params)
     assert_equal Range.new(1,10), generator.make_range
   end
 
   test "primes method returns empty if sent 1" do
-    params = {
-      :start_param => 1,
-      :end_param => 10
-    }
     generator = Generator.new(params)
     assert_equal [], generator.primes(1)
   end
 
   test "primes method returns 2 if sent 2" do
-    params = {
-      :start_param => 1,
-      :end_param => 10
-    }
     generator = Generator.new(params)
-    assert_equal [2], generator.primes(2)
+    assert_equal 2, generator.primes(2)
   end
 
   test "primes method returns empty if sent non-prime numbers" do
-    params = {
-      :start_param => 1,
-      :end_param => 10
-    }
     generator = Generator.new(params)
     assert_equal [], generator.primes(4)
     assert_equal [], generator.primes(12)
     assert_equal [], generator.primes(100)
   end
 
-  test "primes method returns empty if sent non-prime numbers" do
-    params = {
-      :start_param => 1,
-      :end_param => 10
-    }
+  test "init method sets list variable" do
     generator = Generator.new(params)
-    assert_equal [], generator.primes(4)
-    assert_equal [], generator.primes(12)
-    assert_equal [], generator.primes(100)
+    generator.init
+    assert_equal [], generator.list
   end
+
+  test "init method sets range variable" do
+    generator = Generator.new(params)
+    generator.init
+    assert_equal (1..10), generator.range
+  end
+
 
 end
