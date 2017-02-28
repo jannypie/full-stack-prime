@@ -2,11 +2,17 @@
 
 ## Installation
 - requires Ruby >= 2.2.2
-- cd to /app
-- bundle install
-- rails db:migrate
-- rails test test/models/generator_test.rb
+- `cd /app`
+- `bundle install`
+- `rails db:migrate`
+
+## To run app
+- `rails runner app/controllers/application_controller.rb`
+- `rails test test/models/generator_test.rb`
+- `rails test test/models/interface_test.rb`
 
 
 If time allows:
-- refactor a helper for testing so params don't have to be written for each test
+- refactor interface.rb
+- generator doesn't accept backwards params (90,3)
+- generator will accept negative numbers
