@@ -2,7 +2,7 @@ class Generator < ApplicationRecord
   validates :start_param, presence: true, numericality: { only_integer: true }
   validates :end_param, presence: true, numericality: { only_integer: true }
 
-  attr_reader :list
+  attr_reader :list, :range
 
   # new pseudocode
   # rethinking my method
@@ -18,22 +18,28 @@ class Generator < ApplicationRecord
   end
 
   def make_range
-    range = Range.new(self.start_param,self.end_param)
-    return range
+     Range.new(self.start_param,self.end_param)
+  end
+
+  def start_priming
+    @list = @range.map do |num|
+      primes(num)
+    end
+    @list = @list.compact
   end
 
   def primes(num)
 
     # break condition
     if num <= 1
-      return []
+      return
     end
 
     (2..num).each do |x|
       # if its evenly divisible and not the same as itself
       if num % x == 0 && num != x
         # num is not a prime
-        return []
+        return
       # but if we've gotten here and it IS itself
       elsif num % x == 0 && num == x
         # that means it's prime: break condition

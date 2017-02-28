@@ -59,7 +59,7 @@ class GeneratorTest < ActiveSupport::TestCase
 
   test "primes method returns empty if sent 1" do
     generator = Generator.new(params)
-    assert_equal [], generator.primes(1)
+    assert_nil generator.primes(1)
   end
 
   test "primes method returns 2 if sent 2" do
@@ -69,9 +69,9 @@ class GeneratorTest < ActiveSupport::TestCase
 
   test "primes method returns empty if sent non-prime numbers" do
     generator = Generator.new(params)
-    assert_equal [], generator.primes(4)
-    assert_equal [], generator.primes(12)
-    assert_equal [], generator.primes(100)
+    assert_nil generator.primes(4)
+    assert_nil generator.primes(12)
+    assert_nil generator.primes(100)
   end
 
   test "init method sets list variable" do
@@ -86,5 +86,33 @@ class GeneratorTest < ActiveSupport::TestCase
     assert_equal (1..10), generator.range
   end
 
+  test "start_priming method begins primes" do
+    tiny_params = {
+      :start_param => 1,
+      :end_param => 2
+    }
+    generator = Generator.new(tiny_params)
+    generator.init
+    generator.start_priming
+    assert_equal [2], generator.list
+  end
+
+  test "generator does not stack overflow" do
+    generator = Generator.new(params)
+    generator.init
+    generator.start_priming
+    assert_equal [2,3,5,7], generator.list
+  end
+
+  test "generator finds primes in arbitrary range" do
+    mega_params = {
+      :start_param => 7900,
+      :end_param => 7920
+    }
+    generator = Generator.new(mega_params)
+    generator.init
+    generator.start_priming
+    assert_equal [7901,7907,7919], generator.list
+  end
 
 end
