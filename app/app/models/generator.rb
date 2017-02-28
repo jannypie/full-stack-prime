@@ -26,6 +26,7 @@ class Generator < ApplicationRecord
       primes(num)
     end
     @list = @list.compact
+    print_results
   end
 
   def primes(num)
@@ -50,6 +51,13 @@ class Generator < ApplicationRecord
       end
     end
 
+  end
+
+  def print_results
+    p "Prime numbers between #{self.start_param} and #{self.end_param}"
+    @list.each_with_index do |line,i|
+      puts "#{i + 1}. #{line.to_s}"
+    end
   end
 
 
